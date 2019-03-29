@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+# Setup Icelab dotfiles
+echo "Fetching icelab/dotfiles from GitHub:"
+if [ ! -d "$HOME/.dotfiles-icelab" ]; then
+  echo "Cloning to ~/.dotfiles-icelab:"
+  git clone $Q "https://github.com/icelab/dotfiles" ~/.dotfiles-icelab
+else
+  (
+    cd ~/.dotfiles-icelab
+    git pull $Q --rebase --autostash
+  )
+fi
+echo "OK"
