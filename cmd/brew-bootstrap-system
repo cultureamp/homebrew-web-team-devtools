@@ -12,4 +12,6 @@ else
     git pull $Q --rebase --autostash
   )
 fi
+cd ~/.dotfiles-icelab
+./script/setup
 echo "OK"
