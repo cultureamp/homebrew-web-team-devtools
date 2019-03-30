@@ -1,0 +1,46 @@
+#!/bin/bash
+# Installs asdf-managed package versions
+set -e
+
+if [ "$1" = "--debug" ]; then
+  shift
+  PRINT_DEBUG="1"
+  set -x
+fi
+
+warn() { echo "$@" >&2; }
+abort() { EXPECTED_EXIT="1"; warn "$@"; exit 1; }
+
+cleanup() {
+  set +e
+  if [ -n "$EXPECTED_EXIT" ]; then
+    return
+  fi
+  warn "Error: $(basename $0) failed!"
+  if [ -z "$PRINT_DEBUG" ]; then
+    warn "For debugging output run:"
+    warn "  $0 --debug"
+    warn "If you're stuck: file an issue with debugging output at:"
+    warn "  https://github.com/icelab/homebrew-bootstrap/issues/new"
+  fi
+}
+trap "cleanup" EXIT
+
+if ! which asdf &>/dev/null; then
+  abort "Error: you need to 'brew install asdf'!"
+fi
+
+if ! [ -f .tool-versions ]; then
+  abort "Error: you need a '.tool-versions' file to install packages"
+fi
+
+for plugin in $(cat .tool-versions | awk '{print $1}'); do
+  if [ -z $(asdf plugin-list | grep $plugin) ]; then
+    asdf plugin-add $plugin
+  fi
+done
+
+asdf install
+
+EXPECTED_EXIT="1"
+exit 0
