@@ -42,5 +42,11 @@ done
 
 asdf install
 
+if [ ! -z "$(grep ruby .tool-versions)" ]; then
+  (asdf which bundle &>/dev/null && bundle -v &>/dev/null) || {
+    gem install bundler
+  }
+fi
+
 EXPECTED_EXIT="1"
 exit 0
