@@ -30,7 +30,7 @@ if ! which asdf &>/dev/null; then
   abort "Error: you need to 'brew install asdf'!"
 fi
 
-if ! [ -f .tool-versions ]; then
+if [ ! -f .tool-versions ]; then
   abort "Error: you need a '.tool-versions' file to install packages"
 fi
 
