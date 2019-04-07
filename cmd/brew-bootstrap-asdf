@@ -42,8 +42,8 @@ done
 
 if [ ! -z "$(grep nodejs .tool-versions)" ]; then
   brew bundle --file=- <<EOF
-  brew "gpg"
-  EOF
+brew "gpg"
+EOF
 
   bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
 fi
