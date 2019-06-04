@@ -23,6 +23,7 @@ tap "heroku/brew"
 brew "asdf"
 brew "gpg"
 brew "heroku"
+brew "zsh"
 EOF
 echo "OK"
 
