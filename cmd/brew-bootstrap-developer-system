@@ -19,7 +19,6 @@ echo "OK"
 # Install standard homebrew packages
 echo "Installing standard homebrew packages…"
 brew bundle --file=- <<EOF
-tap "heroku/brew"
 brew "asdf"
 brew "gpg"
 EOF
