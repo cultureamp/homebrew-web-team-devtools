@@ -35,10 +35,3 @@ if [ -z "$(asdf plugin-list | grep nodejs)" ]; then
 fi
 bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
 echo "OK"
-
-# Switch to zsh (but only if the user is on a standard bash shell)
-if [ ! -z "$(dscl . -read /Users/$USER UserShell | grep /bin/bash)" ]; then
-  echo "Switching shell to zsh…"
-  chsh -s /bin/zsh
-  echo "OK"
-fi
