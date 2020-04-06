@@ -1,4 +1,4 @@
-# Homebrew Bootstrap
+# Culture Amp web team Homebrew dev tools
 
 A collection of helper scripts for system and application setup.
 
@@ -7,7 +7,7 @@ A collection of helper scripts for system and application setup.
 ## Usage
 
 ```bash
-brew tap icelab/bootstrap
+brew tap cultureamp/web-team-devtools
 brew bootstrap-system # or any other command
 ```
 

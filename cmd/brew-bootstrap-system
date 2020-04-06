@@ -1,18 +1,18 @@
 #!/bin/bash
 set -e
 
-# Setup Icelab dotfiles
-echo "Fetching icelab/dotfiles from GitHub…"
-if [ ! -d "$HOME/.dotfiles-icelab" ]; then
-  echo "Cloning to ~/.dotfiles-icelab:"
-  git clone $Q "https://github.com/icelab/dotfiles" ~/.dotfiles-icelab
+# Setup shared dotfiles
+echo "Fetching cultureamp/web-team-dotfiles from GitHub…"
+if [ ! -d "$HOME/.dotfiles-web-team" ]; then
+  echo "Cloning to ~/.dotfiles-web-team:"
+  git clone $Q "https://github.com/cultureamp/web-team-dotfiles" ~/.dotfiles-web-team
 else
   (
-    cd ~/.dotfiles-icelab
+    cd ~/.dotfiles-web-team
     git pull $Q --rebase --autostash
   )
 fi
-cd ~/.dotfiles-icelab
+cd ~/.dotfiles-web-team
 ./script/setup
 echo "OK"
 
