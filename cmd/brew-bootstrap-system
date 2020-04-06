@@ -22,7 +22,6 @@ brew bundle --file=- <<EOF
 tap "heroku/brew"
 brew "asdf"
 brew "gpg"
-brew "heroku"
 EOF
 echo "OK"
 
