@@ -31,7 +31,7 @@ if ! which asdf &>/dev/null; then
 fi
 
 if [ ! -f .tool-versions ]; then
-  abort "Error: you need a '.tool-versions' file to install packages"
+  abort "Error: you need a '.tool-versions' file to install packages!"
 fi
 
 for plugin in $(cat .tool-versions | awk '{print $1}'); do
@@ -41,6 +41,10 @@ for plugin in $(cat .tool-versions | awk '{print $1}'); do
 done
 
 asdf install
+
+for tool in $(cat .tool-versions); do
+  asdf shell $plugin
+done
 
 if [ ! -z "$(grep ruby .tool-versions)" ]; then
   (asdf which bundle &>/dev/null && bundle -v &>/dev/null) || {
