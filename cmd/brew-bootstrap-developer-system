@@ -2,19 +2,28 @@
 set -e
 
 # Setup shared dotfiles
-echo "Fetching cultureamp/web-team-dotfiles from GitHub…"
-if [ ! -d "$HOME/.dotfiles-web-team" ]; then
-  echo "Cloning to ~/.dotfiles-web-team:"
-  git clone $Q "https://github.com/cultureamp/web-team-dotfiles" ~/.dotfiles-web-team
+read -r -n 1 -p "Would you like install dotfiles (Y|n)?" answer
+echo
+
+if [[ $answer =~ ^[Yy]$ ]]; then
+  echo "Fetching cultureamp/web-team-dotfiles from GitHub…"
+  if [[ ! -d "$HOME/.dotfiles-web-team" ]]; then
+    echo "Cloning to ~/.dotfiles-web-team:"
+    git clone $Q "https://github.com/cultureamp/web-team-dotfiles" ~/.dotfiles-web-team
+  else
+    echo "Updating ~/.dotfiles-web-team"
+    (
+      cd ~/.dotfiles-web-team
+      git pull $Q --rebase --autostash
+    )
+  fi
+  cd ~/.dotfiles-web-team
+  ./script/setup
+  echo "OK"
 else
-  (
-    cd ~/.dotfiles-web-team
-    git pull $Q --rebase --autostash
-  )
+  echo "Skipping dotfile installation..."
+  echo "OK"
 fi
-cd ~/.dotfiles-web-team
-./script/setup
-echo "OK"
 
 # Install standard homebrew packages
 echo "Installing standard homebrew packages…"
@@ -23,10 +32,10 @@ echo "OK"
 
 # Install/bootstrap standard asdf plugins
 echo "Installing standard asdf plugins…"
-if [ -z "$(asdf plugin-list | grep ruby)" ]; then
+if [[ -z "$(asdf plugin list | grep ruby)" ]]; then
   asdf plugin add ruby
 fi
-if [ -z "$(asdf plugin-list | grep nodejs)" ]; then
+if [[ -z "$(asdf plugin list | grep nodejs)" ]]; then
   asdf plugin add nodejs
 fi
 echo "OK"
