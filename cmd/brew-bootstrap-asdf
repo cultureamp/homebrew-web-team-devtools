@@ -36,17 +36,9 @@ fi
 
 for plugin in $(cat .tool-versions | awk '{print $1}'); do
   if [ -z $(asdf plugin-list | grep $plugin) ]; then
-    asdf plugin-add $plugin
+    asdf plugin add $plugin
   fi
 done
-
-if [ ! -z "$(grep nodejs .tool-versions)" ]; then
-  brew bundle --file=- <<EOF
-brew "gpg"
-EOF
-
-  bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
-fi
 
 asdf install
 

@@ -18,19 +18,15 @@ echo "OK"
 
 # Install standard homebrew packages
 echo "Installing standard homebrew packages…"
-brew bundle --file=- <<EOF
-brew "asdf"
-brew "gpg"
-EOF
+brew install asdf
 echo "OK"
 
 # Install/bootstrap standard asdf plugins
 echo "Installing standard asdf plugins…"
 if [ -z "$(asdf plugin-list | grep ruby)" ]; then
-  asdf plugin-add ruby
+  asdf plugin add ruby
 fi
 if [ -z "$(asdf plugin-list | grep nodejs)" ]; then
-  asdf plugin-add nodejs
+  asdf plugin add nodejs
 fi
-bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
 echo "OK"
