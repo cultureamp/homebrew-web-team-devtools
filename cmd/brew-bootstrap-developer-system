@@ -2,7 +2,7 @@
 set -e
 
 # Setup shared dotfiles
-read -r -n 1 -p "Would you like install dotfiles (Y|n)?" answer
+read -r -n 1 -p "Would you like install dotfiles from https://github.com/cultureamp/web-team-dotfiles (Y/n)?" answer
 echo
 
 if [[ $answer =~ ^[Yy]$ ]]; then
