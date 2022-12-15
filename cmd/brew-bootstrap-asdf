@@ -35,7 +35,7 @@ if [ ! -f .tool-versions ]; then
 fi
 
 for plugin in $(cat .tool-versions | awk '{print $1}'); do
-  if [ -z $(asdf plugin-list | grep $plugin) ]; then
+  if [ -z $(asdf plugin list | grep $plugin) ]; then
     asdf plugin add $plugin
   fi
 done
